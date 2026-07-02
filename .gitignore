@@ -1,0 +1,26 @@
+# Superpowers / brainstorm (mockups temporários)
+.superpowers/
+
+# Dependências
+node_modules/
+frontend/node_modules/
+
+# Build
+dist/
+frontend/dist/
+
+# Ambiente / segredos
+.env
+.env.local
+.env*.local
+*.local
+
+# Supabase
+supabase/.temp/
+supabase/.branches/
+
+# Editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+Thumbs.db
