@@ -213,3 +213,46 @@ ul {
 .surgir {
   animation: surgir 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
+
+/* — Selo de status de pedido (compartilhado: conta + painel) — */
+.selo-status {
+  display: inline-block;
+  font-family: var(--fonte-corpo);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.selo-status--novo {
+  background: var(--lavanda-100);
+  color: #5a4b70;
+  border-color: var(--lavanda-300);
+}
+.selo-status--confirmado {
+  background: var(--rosa-50);
+  color: var(--rosa-700);
+  border-color: var(--rosa-300);
+}
+.selo-status--em_preparo {
+  background: #fdeecf;
+  color: #8a6218;
+  border-color: #f0d59a;
+}
+.selo-status--a_caminho {
+  background: #d9ecef;
+  color: #256470;
+  border-color: #a9d3da;
+}
+.selo-status--entregue {
+  background: var(--salvia-100);
+  color: var(--salvia-700);
+  border-color: var(--salvia-300);
+}
+.selo-status--cancelado {
+  background: #eee3df;
+  color: #8a736b;
+  border-color: #d6c4bc;
+}

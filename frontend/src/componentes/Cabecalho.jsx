@@ -1,9 +1,17 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCarrinho } from "../loja/CarrinhoContexto";
+import { useAuth } from "../conta/AuthContexto";
 import "./Cabecalho.css";
 
 export default function Cabecalho() {
   const { quantidadeTotal } = useCarrinho();
+  const { usuario, ehAdmin, configurado, sair } = useAuth();
+  const navegar = useNavigate();
+
+  async function aoSair() {
+    await sair();
+    navegar("/", { replace: true });
+  }
 
   return (
     <header className="cabecalho">
@@ -24,6 +32,25 @@ export default function Cabecalho() {
           <NavLink to="/conta/meus-pedidos" className="cabecalho__link">
             Meus pedidos
           </NavLink>
+          {ehAdmin && (
+            <NavLink to="/painel" className="cabecalho__link">
+              Painel
+            </NavLink>
+          )}
+          {configurado &&
+            (usuario ? (
+              <button
+                type="button"
+                className="cabecalho__link cabecalho__sair"
+                onClick={aoSair}
+              >
+                Sair
+              </button>
+            ) : (
+              <NavLink to="/entrar" className="cabecalho__link">
+                Entrar
+              </NavLink>
+            ))}
         </nav>
 
         <Link to="/carrinho" className="carrinho-botao" aria-label="Ver carrinho">
