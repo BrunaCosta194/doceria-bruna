@@ -1,0 +1,130 @@
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--marfim) 82%, transparent);
+  backdrop-filter: blur(12px) saturate(1.1);
+  border-bottom: 1px solid var(--linha);
+}
+
+.cabecalho__linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 74px;
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.marca__selo {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50% 50% 50% 12px;
+  background: linear-gradient(150deg, var(--rosa-300), var(--acento-escuro));
+  color: #fff;
+  font-family: var(--fonte-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  box-shadow: var(--sombra-sm);
+}
+
+.marca__nome {
+  font-family: var(--fonte-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--cacau-900);
+  line-height: 1;
+}
+
+.marca__nome em {
+  font-style: italic;
+  color: var(--acento-escuro);
+}
+
+.cabecalho__nav {
+  display: none;
+  gap: 1.8rem;
+  margin-left: auto;
+  margin-right: 1.6rem;
+}
+
+.cabecalho__link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--texto-suave);
+  padding: 0.4rem 0;
+  position: relative;
+  transition: color var(--transicao);
+}
+
+.cabecalho__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: var(--acento);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transicao);
+  border-radius: 2px;
+}
+
+.cabecalho__link:hover,
+.cabecalho__link.active {
+  color: var(--cacau-900);
+}
+
+.cabecalho__link.active::after {
+  transform: scaleX(1);
+}
+
+.carrinho-botao {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  color: var(--cacau-900);
+  background: var(--papel);
+  box-shadow: inset 0 0 0 1.5px var(--linha), var(--sombra-sm);
+  transition: transform var(--transicao), box-shadow var(--transicao);
+}
+
+.carrinho-botao:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 0 1.5px var(--rosa-300), var(--sombra-md);
+}
+
+.carrinho-botao__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  background: var(--acento-escuro);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: var(--r-pill);
+  border: 2px solid var(--marfim);
+}
+
+@media (min-width: 720px) {
+  .cabecalho__nav {
+    display: flex;
+  }
+}

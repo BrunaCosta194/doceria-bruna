@@ -1,0 +1,72 @@
+.botao {
+  --_bg: var(--acento);
+  --_fg: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--fonte-corpo);
+  font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1;
+  padding: 0.95rem 1.6rem;
+  border: none;
+  border-radius: var(--r-pill);
+  background: var(--_bg);
+  color: var(--_fg);
+  box-shadow: var(--sombra-sm);
+  transition: transform var(--transicao), box-shadow var(--transicao),
+    background var(--transicao), filter var(--transicao);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.botao:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-md);
+  filter: brightness(1.03);
+}
+
+.botao:active {
+  transform: translateY(0);
+  box-shadow: var(--sombra-sm);
+}
+
+.botao:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.botao--primario {
+  --_bg: linear-gradient(180deg, var(--rosa-500), var(--acento-escuro));
+}
+
+.botao--secundario {
+  --_bg: var(--papel);
+  --_fg: var(--cacau-900);
+  box-shadow: inset 0 0 0 1.5px var(--linha), var(--sombra-sm);
+}
+
+.botao--salvia {
+  --_bg: linear-gradient(180deg, var(--salvia-500), var(--salvia-700));
+}
+
+.botao--fantasma {
+  --_bg: transparent;
+  --_fg: var(--acento-escuro);
+  box-shadow: none;
+  padding-inline: 0.6rem;
+}
+
+.botao--fantasma:hover {
+  box-shadow: none;
+  filter: none;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.botao--bloco {
+  width: 100%;
+}

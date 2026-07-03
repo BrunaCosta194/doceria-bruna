@@ -1,0 +1,9 @@
+# Config do Supabase CLI — Doceria da Bruna
+# Rode `supabase link --project-ref <ref-do-seu-projeto>` para conectar.
+
+project_id = "doceria-bruna"
+
+[functions.criar-pedido]
+# Convidados (sem login) também finalizam pedido, então a função não exige
+# JWT. A autenticação é opcional e lida dentro da função (para o desconto).
+verify_jwt = false

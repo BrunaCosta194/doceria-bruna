@@ -1,0 +1,106 @@
+.rodape {
+  margin-top: 5rem;
+  padding-top: 3.5rem;
+  background: linear-gradient(180deg, transparent, var(--creme) 55%);
+  border-top: 1px solid var(--linha);
+}
+
+.rodape__grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.rodape__marca .marca__nome {
+  font-family: var(--fonte-display);
+  font-size: 1.5rem;
+}
+
+.rodape__marca .marca__nome em {
+  font-style: italic;
+  color: var(--acento-escuro);
+}
+
+.rodape__lema {
+  margin-top: 0.7rem;
+  max-width: 30ch;
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}
+
+.bloco-versiculo {
+  margin: 0;
+}
+
+.rodape__versiculo {
+  margin-top: 1.6rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rosa-300);
+}
+
+.bloco-versiculo .versiculo {
+  font-size: 1.02rem;
+  margin: 0;
+  max-width: 40ch;
+}
+
+.bloco-versiculo__ref {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--acento-escuro);
+}
+
+.rodape__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.rodape__col h4 {
+  font-family: var(--fonte-corpo);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--texto-tenue);
+  margin-bottom: 0.3rem;
+}
+
+.rodape__col a {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+  width: fit-content;
+  transition: color var(--transicao);
+}
+
+.rodape__col a:hover {
+  color: var(--acento-escuro);
+}
+
+.rodape__tenue {
+  color: var(--texto-tenue);
+  font-size: 0.85rem;
+}
+
+.rodape__base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 1.4rem 0 2rem;
+  border-top: 1px solid var(--linha);
+  font-size: 0.85rem;
+  color: var(--texto-tenue);
+}
+
+@media (min-width: 760px) {
+  .rodape__grade {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+  }
+}

@@ -1,0 +1,262 @@
+.produto-pagina {
+  padding-top: 1.6rem;
+}
+
+.migalhas {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--texto-tenue);
+  margin-bottom: 1.6rem;
+}
+
+.migalhas a:hover {
+  color: var(--acento-escuro);
+}
+
+.produto-pagina__grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.produto-pagina__foto {
+  position: relative;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--sombra-lg);
+  border: 6px solid var(--papel);
+  aspect-ratio: 1;
+}
+
+.produto-pagina__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.produto-pagina__selo {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: color-mix(in srgb, var(--lavanda-300) 82%, #fff);
+  color: var(--cacau-900);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--r-pill);
+  box-shadow: var(--sombra-md);
+}
+
+.produto-pagina__nome {
+  margin-top: 0.6rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.produto-pagina__desc {
+  margin-top: 1rem;
+  color: var(--texto-suave);
+  font-size: 1.05rem;
+  max-width: 46ch;
+}
+
+.produto-pagina__preco {
+  margin-top: 1.4rem;
+  font-family: var(--fonte-display);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--acento-escuro);
+}
+
+.grupo-var {
+  margin-top: 1.8rem;
+  border: none;
+  padding: 0;
+}
+
+.grupo-var legend,
+.grupo-var__legenda {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-tenue);
+  margin-bottom: 0.7rem;
+  padding: 0;
+  display: block;
+}
+
+.grupo-var__opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--linha);
+  background: var(--papel);
+  color: var(--cacau-900);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all var(--transicao);
+}
+
+.chip:hover {
+  border-color: var(--rosa-300);
+}
+
+.chip--ativo {
+  border-color: var(--acento);
+  background: var(--rosa-50);
+  box-shadow: inset 0 0 0 1px var(--acento);
+}
+
+.chip__delta {
+  font-size: 0.8rem;
+  color: var(--acento-escuro);
+  font-weight: 600;
+}
+
+.campo-data {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--linha);
+  background: var(--papel);
+  color: var(--cacau-900);
+  width: 100%;
+  max-width: 260px;
+}
+
+.campo-data:focus {
+  border-color: var(--acento);
+  outline: none;
+}
+
+.grupo-var__dica {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--texto-tenue);
+}
+
+.produto-pagina__compra {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.9rem;
+  align-items: stretch;
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--papel);
+  border: 1.5px solid var(--linha);
+  border-radius: var(--r-pill);
+  padding: 0.3rem;
+}
+
+.stepper button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--creme);
+  color: var(--cacau-900);
+  font-size: 1.3rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: background var(--transicao);
+}
+
+.stepper button:hover {
+  background: var(--rosa-100);
+}
+
+.stepper span {
+  min-width: 2ch;
+  text-align: center;
+  font-weight: 600;
+}
+
+.produto-pagina__aviso {
+  margin-top: 0.8rem;
+  color: var(--acento-escuro);
+  font-size: 0.88rem;
+}
+
+.produto-pagina__ir-carrinho {
+  margin-top: 1.4rem;
+  background: none;
+  border: none;
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0;
+  transition: color var(--transicao);
+}
+
+.produto-pagina__ir-carrinho:hover {
+  color: var(--acento-escuro);
+}
+
+.produto-pagina__sem-foto {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 5rem;
+  background: linear-gradient(150deg, var(--rosa-100), var(--creme));
+}
+
+.produto-carregando {
+  padding-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.produto-esqueleto--foto {
+  aspect-ratio: 1;
+  border-radius: var(--r-xl);
+}
+
+.produto-esqueleto--info {
+  min-height: 320px;
+  border-radius: var(--r-lg);
+}
+
+.vazio-simples {
+  padding: 5rem 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media (min-width: 840px) {
+  .produto-carregando {
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+  }
+}
+
+@media (min-width: 840px) {
+  .produto-pagina__grade {
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+  }
+  .produto-pagina__compra {
+    max-width: 420px;
+  }
+}

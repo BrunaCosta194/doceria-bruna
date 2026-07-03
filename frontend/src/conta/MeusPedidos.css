@@ -1,0 +1,33 @@
+.meus-pedidos {
+  padding: 4rem 0 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.meus-pedidos__cartao {
+  max-width: 480px;
+  text-align: center;
+  background: var(--papel);
+  border: 1px solid var(--linha);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sombra-md);
+  padding: clamp(2rem, 5vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.meus-pedidos__emoji {
+  font-size: 3rem;
+  margin-bottom: 0.4rem;
+}
+
+.meus-pedidos__cartao h1 {
+  font-size: 2rem;
+}
+
+.meus-pedidos__cartao p {
+  color: var(--texto-suave);
+  margin: 0.4rem 0 1.2rem;
+}

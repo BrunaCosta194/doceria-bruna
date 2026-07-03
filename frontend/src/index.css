@@ -1,0 +1,215 @@
+/* ============================================================
+   Doceria da Bruna — Design System
+   Direção: confeitaria artesanal editorial, pastéis quentes.
+   ============================================================ */
+
+:root {
+  /* — Cores base — */
+  --marfim: #fbf5ec; /* fundo quente principal */
+  --creme: #f5ead9; /* superfícies elevadas suaves */
+  --papel: #fffdf8; /* cards / campos */
+
+  /* — Rosa-poeira (acento primário) — */
+  --rosa-50: #fbeceb;
+  --rosa-100: #f6d8d6;
+  --rosa-300: #e8afab;
+  --rosa-500: #d1847e; /* CTA / destaque */
+  --rosa-700: #a85e58;
+
+  /* — Verde-sálvia (secundário) — */
+  --salvia-100: #e2e7d7;
+  --salvia-300: #b7c3a3;
+  --salvia-500: #8fa07a;
+  --salvia-700: #63704f;
+
+  /* — Lavanda (toque terciário) — */
+  --lavanda-100: #e7e1ee;
+  --lavanda-300: #c9bedd;
+
+  /* — Tinta (texto, tom cacau quente) — */
+  --cacau-900: #3d2f2a;
+  --cacau-700: #5a4841;
+  --cacau-500: #877268;
+  --cacau-300: #b8a79d;
+
+  /* — Semânticos — */
+  --fundo: var(--marfim);
+  --texto: var(--cacau-900);
+  --texto-suave: var(--cacau-700);
+  --texto-tenue: var(--cacau-500);
+  --acento: var(--rosa-500);
+  --acento-escuro: var(--rosa-700);
+  --linha: #ecdfce; /* bordas sutis */
+
+  /* — Tipografia — */
+  --fonte-display: "Fraunces", "Georgia", serif;
+  --fonte-corpo: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+
+  /* — Raios — */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 34px;
+  --r-pill: 999px;
+
+  /* — Sombras em camadas (quentes, não pretas) — */
+  --sombra-sm: 0 1px 2px rgba(101, 74, 62, 0.06),
+    0 2px 6px rgba(101, 74, 62, 0.05);
+  --sombra-md: 0 4px 10px rgba(101, 74, 62, 0.07),
+    0 12px 28px rgba(101, 74, 62, 0.08);
+  --sombra-lg: 0 10px 24px rgba(101, 74, 62, 0.1),
+    0 26px 60px rgba(101, 74, 62, 0.12);
+
+  /* — Espaçamento base — */
+  --espaco: 8px;
+  --largura-max: 1120px;
+
+  --transicao: 220ms cubic-bezier(0.4, 0.14, 0.3, 1);
+}
+
+/* Grão sutil aplicado no fundo para dar textura artesanal */
+:root {
+  --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-corpo);
+  color: var(--texto);
+  background-color: var(--fundo);
+  background-image: radial-gradient(
+      1200px 600px at 85% -10%,
+      var(--rosa-50) 0%,
+      transparent 55%
+    ),
+    radial-gradient(900px 500px at -5% 0%, var(--salvia-100) 0%, transparent 50%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Camada de grão por cima do fundo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: var(--grao);
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--fonte-display);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--texto);
+  margin: 0;
+  font-optical-sizing: auto;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* — Utilitários de layout — */
+.container {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: clamp(1.1rem, 4vw, 2.5rem);
+}
+
+.olho {
+  font-family: var(--fonte-corpo);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--acento-escuro);
+}
+
+/* — Versículo (itálico delicado) — */
+.versiculo {
+  font-family: var(--fonte-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--texto-suave);
+  letter-spacing: 0.01em;
+}
+
+/* Rolagem suave e foco acessível */
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* — Animações de entrada — */
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.surgir {
+  animation: surgir 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
