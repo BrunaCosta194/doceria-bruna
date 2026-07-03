@@ -79,6 +79,58 @@ Vercel (Root Directory = `frontend`, rewrites de SPA em `frontend/vercel.json`).
 6. **Testar ponta a ponta:** pedido logado e como visitante, desconto de 1ª compra,
    encomenda aguardando confirmação, pedido aparecendo no painel.
 
+## Fluxo do WhatsApp (n8n + Evolution API) — a implementar
+
+Objetivo: quando um pedido é criado, avisar a Bruna no WhatsApp. É **desacoplado** do
+site (a Edge Function só dispara um webhook e segue a vida — falha aqui não derruba o
+pedido). Montar este workflow no n8n:
+
+**Contrato do webhook** — a Edge Function `criar-pedido` faz `POST` no
+`N8N_WEBHOOK_URL` com este corpo JSON:
+
+```json
+{
+  "pedido_id": "uuid",
+  "numero": 1234,
+  "nome": "Maria",
+  "telefone": "5599999999999",
+  "total": 78.5,
+  "tipo_entrega": "entrega" | "retirada",
+  "status": "novo" | "aguardando_confirmacao",
+  "tem_encomenda": true | false
+}
+```
+
+**Nós do workflow n8n:**
+
+1. **Webhook (trigger)** — método `POST`, path próprio (ex: `/pedido-novo`). A URL
+   pública que o n8n gerar é o valor do secret `N8N_WEBHOOK_URL` na Edge Function.
+2. **Switch / IF** — ramifica pela natureza do pedido usando `status`/`tem_encomenda`:
+   - `status = "aguardando_confirmacao"` (ou `tem_encomenda = true`) → **encomenda a
+     confirmar** (mensagem pede ação da Bruna: confirmar/recusar no painel).
+   - senão (`status = "novo"`) → **pronta entrega** (mensagem informativa de pedido novo).
+3. **Set / Function (montar a mensagem)** — texto em pt-BR, ex.:
+   - Encomenda: `🍰 *Nova ENCOMENDA #{{numero}}* — precisa da sua confirmação!\n{{nome}} · {{telefone}}\nTotal: R$ {{total}}\nEntre no painel para confirmar ou recusar.`
+   - Pronta entrega: `🧺 *Novo pedido #{{numero}}*\n{{nome}} · {{telefone}}\n{{tipo_entrega}} · Total: R$ {{total}}`
+4. **HTTP Request → Evolution API** — envia a mensagem. Endpoint típico
+   `POST {EVOLUTION_URL}/message/sendText/{instancia}` com header `apikey` e corpo
+   `{ "number": "<whatsapp_da_bruna>", "text": "<mensagem>" }`. O número da Bruna vem de
+   `configuracoes.whatsapp_bruna` (formato só dígitos com DDI, ex: `5599999999999`) —
+   pode ficar fixo numa credencial/variável do n8n ou ser buscado do Supabase num nó
+   anterior.
+5. **(Opcional) Responder 200** ao webhook — o n8n já responde; a Edge Function nem
+   espera o resultado (chamada tolerante a falha).
+
+**Segredos / configuração (nunca no frontend):**
+- `N8N_WEBHOOK_URL` → secret da Edge Function `criar-pedido` (Supabase).
+- URL base, `apikey` e nome da instância da **Evolution API** → credenciais dentro do n8n.
+- Número da Bruna → `configuracoes.whatsapp_bruna` no banco (a Bruna edita em
+  Painel → Configurações).
+
+**Extensões futuras** (fase 2): avisar o *cliente* quando a Bruna muda o status
+(confirmado / a caminho / entregue) — outro webhook disparado no
+`atualizarStatusPedido`; remarketing automatizado.
+
 ## Regras importantes (não violar)
 
 - **Preço é calculado no servidor** (Edge Function `criar-pedido`), nunca confiando
