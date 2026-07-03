@@ -226,6 +226,11 @@ ul {
   white-space: nowrap;
   border: 1px solid transparent;
 }
+.selo-status--aguardando_confirmacao {
+  background: #fdeecf;
+  color: #8a6218;
+  border-color: #f0d59a;
+}
 .selo-status--novo {
   background: var(--lavanda-100);
   color: #5a4b70;

@@ -77,6 +77,14 @@ export function ProvedorAuth({ children }) {
     if (error) throw new Error(traduzErro(error.message));
   }
 
+  async function entrarComGoogle() {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: window.location.origin },
+    });
+    if (error) throw new Error(traduzErro(error.message));
+  }
+
   async function sair() {
     await supabase.auth.signOut();
   }
@@ -93,6 +101,7 @@ export function ProvedorAuth({ children }) {
     configurado: supabaseConfigurado,
     entrar,
     cadastrar,
+    entrarComGoogle,
     sair,
   };
 

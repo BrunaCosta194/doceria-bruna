@@ -3,6 +3,7 @@ import { listarPedidos, atualizarStatusPedido } from "../lib/admin";
 import { moeda } from "../lib/formato";
 
 const FLUXO_STATUS = [
+  "aguardando_confirmacao",
   "novo",
   "confirmado",
   "em_preparo",
@@ -12,6 +13,7 @@ const FLUXO_STATUS = [
 ];
 
 const ROTULO_STATUS = {
+  aguardando_confirmacao: "Aguardando confirmação",
   novo: "Recebido",
   confirmado: "Confirmado",
   em_preparo: "Em preparo",
@@ -234,6 +236,26 @@ export default function PainelPedidos() {
                 <dd>{moeda(selecionado.total)}</dd>
               </div>
             </dl>
+
+            {selecionado.status === "aguardando_confirmacao" && (
+              <div className="painel-modal__confirmar">
+                <p>Esta encomenda está aguardando sua confirmação.</p>
+                <div className="painel-modal__confirmar-acoes">
+                  <button
+                    className="botao-confirmar"
+                    onClick={() => mudarStatus(selecionado, "confirmado")}
+                  >
+                    ✓ Confirmar
+                  </button>
+                  <button
+                    className="botao-recusar"
+                    onClick={() => mudarStatus(selecionado, "cancelado")}
+                  >
+                    ✕ Recusar
+                  </button>
+                </div>
+              </div>
+            )}
 
             <label className="painel-modal__status">
               Status do pedido

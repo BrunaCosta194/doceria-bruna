@@ -76,6 +76,7 @@ Deno.serve(async (req) => {
     data_encomenda: string | null;
   }[] = [];
   let subtotal = 0;
+  let temEncomenda = false;
 
   for (const item of corpo.itens) {
     const qtd = Math.floor(Number(item.qtd));
@@ -124,6 +125,7 @@ Deno.serve(async (req) => {
     // Encomenda: valida antecedência.
     let dataEncomenda: string | null = null;
     if (produto.sob_encomenda) {
+      temEncomenda = true;
       if (!item.data_encomenda) {
         return json(
           { erro: `Escolha a data de entrega para "${produto.nome}".` },
@@ -200,6 +202,9 @@ Deno.serve(async (req) => {
 
   const total = Math.max(0, subtotal + freteValor - descontoValor);
 
+  // Encomenda espera a Bruna confirmar; pronta entrega já entra como "novo".
+  const statusInicial = temEncomenda ? "aguardando_confirmacao" : "novo";
+
   // — Grava o pedido —
   const { data: pedido, error: erroPedido } = await db
     .from("pedidos")
@@ -216,7 +221,7 @@ Deno.serve(async (req) => {
       desconto_valor: descontoValor,
       total,
       forma_pagamento: "entrega",
-      status: "novo",
+      status: statusInicial,
       data_encomenda: itensGravar.find((i) => i.data_encomenda)?.data_encomenda ??
         null,
       observacoes: corpo.observacoes?.trim() || null,
@@ -268,6 +273,8 @@ Deno.serve(async (req) => {
           telefone: corpo.contato.telefone,
           total,
           tipo_entrega: corpo.tipo_entrega,
+          status: statusInicial,
+          tem_encomenda: temEncomenda,
         }),
       });
     } catch (e) {

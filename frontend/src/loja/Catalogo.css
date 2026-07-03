@@ -115,6 +115,60 @@
   padding-top: 1.5rem;
 }
 
+/* Seletor de modo: Do dia (pronta entrega) x Encomenda */
+.catalogo-modos {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.8rem;
+  flex-wrap: wrap;
+}
+
+.catalogo-modo {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: var(--r-lg);
+  border: 1.5px solid var(--linha);
+  background: var(--papel);
+  color: var(--texto-suave);
+  font-family: var(--fonte-display);
+  font-size: 1.15rem;
+  transition: all var(--transicao);
+}
+
+.catalogo-modo small {
+  font-family: var(--fonte-corpo);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--texto-tenue);
+  letter-spacing: 0.02em;
+}
+
+.catalogo-modo:hover {
+  border-color: var(--rosa-300);
+}
+
+.catalogo-modo--ativo {
+  border-color: var(--acento);
+  background: var(--rosa-50);
+  color: var(--acento-escuro);
+  box-shadow: var(--sombra-sm);
+}
+
+.catalogo-modo--ativo small {
+  color: var(--rosa-700);
+}
+
+.catalogo__sub {
+  margin-top: 0.5rem;
+  color: var(--texto-suave);
+  max-width: 46ch;
+}
+
 .catalogo__cabeca {
   display: flex;
   flex-direction: column;

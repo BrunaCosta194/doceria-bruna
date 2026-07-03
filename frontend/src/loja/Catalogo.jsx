@@ -1,10 +1,28 @@
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { carregarCatalogo, carregarConfiguracoes } from "../lib/dados";
 import ProdutoCard from "../componentes/ProdutoCard";
 import Botao from "../componentes/Botao";
 import "./Catalogo.css";
 
+const MODOS = {
+  dia: {
+    olho: "Catálogo do dia",
+    titulo: "Pronto para levar hoje",
+    sub: "Feito no dia, disponível para entrega ou retirada agora mesmo.",
+    encomenda: false,
+  },
+  encomenda: {
+    olho: "Encomendas",
+    titulo: "Encomende com carinho",
+    sub: "Escolha a data e a Bruna prepara especialmente para você.",
+    encomenda: true,
+  },
+};
+
 export default function Catalogo() {
+  const [params, setParams] = useSearchParams();
+  const modo = params.get("modo") === "encomenda" ? "encomenda" : "dia";
   const [filtro, setFiltro] = useState("todos");
   const [categorias, setCategorias] = useState([]);
   const [produtos, setProdutos] = useState([]);
@@ -27,12 +45,21 @@ export default function Catalogo() {
     };
   }, []);
 
+  function trocarModo(novo) {
+    setFiltro("todos");
+    setParams(novo === "encomenda" ? { modo: "encomenda" } : {});
+  }
+
+  const doModo = MODOS[modo];
+
   const visiveis = useMemo(
     () =>
       produtos.filter(
-        (p) => filtro === "todos" || p.categoria_id === filtro
+        (p) =>
+          Boolean(p.sob_encomenda) === doModo.encomenda &&
+          (filtro === "todos" || p.categoria_id === filtro)
       ),
-    [produtos, filtro]
+    [produtos, filtro, doModo.encomenda]
   );
 
   return (
@@ -71,10 +98,32 @@ export default function Catalogo() {
       </section>
 
       <section id="catalogo" className="catalogo container">
+        <div className="catalogo-modos" role="tablist" aria-label="Tipo de catálogo">
+          <button
+            role="tab"
+            aria-selected={modo === "dia"}
+            className={`catalogo-modo ${modo === "dia" ? "catalogo-modo--ativo" : ""}`}
+            onClick={() => trocarModo("dia")}
+          >
+            <span aria-hidden="true">🧺</span> Do dia
+            <small>Pronta entrega</small>
+          </button>
+          <button
+            role="tab"
+            aria-selected={modo === "encomenda"}
+            className={`catalogo-modo ${modo === "encomenda" ? "catalogo-modo--ativo" : ""}`}
+            onClick={() => trocarModo("encomenda")}
+          >
+            <span aria-hidden="true">📅</span> Encomenda
+            <small>Escolha a data</small>
+          </button>
+        </div>
+
         <header className="catalogo__cabeca">
           <div>
-            <span className="olho">Nosso cardápio</span>
-            <h2 className="catalogo__titulo">Escolha seus favoritos</h2>
+            <span className="olho">{doModo.olho}</span>
+            <h2 className="catalogo__titulo">{doModo.titulo}</h2>
+            <p className="catalogo__sub">{doModo.sub}</p>
           </div>
 
           <div className="filtros" role="tablist" aria-label="Categorias">
@@ -104,7 +153,9 @@ export default function Catalogo() {
           </div>
         ) : visiveis.length === 0 ? (
           <p className="catalogo__vazio">
-            Nenhum produto por aqui ainda. Volte em breve! 🤍
+            {modo === "encomenda"
+              ? "Nenhuma encomenda disponível no momento. Volte em breve! 🤍"
+              : "Nada pronto para hoje ainda. Volte em breve! 🤍"}
           </p>
         ) : (
           <div className="catalogo__grade">

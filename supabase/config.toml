@@ -7,3 +7,11 @@ project_id = "doceria-bruna"
 # Convidados (sem login) também finalizam pedido, então a função não exige
 # JWT. A autenticação é opcional e lida dentro da função (para o desconto).
 verify_jwt = false
+
+# Login com Google. Habilite também o provider no painel do Supabase
+# (Authentication > Providers > Google) e crie as credenciais no Google Cloud.
+# As chaves ficam em variáveis de ambiente, nunca no código.
+[auth.external.google]
+enabled = true
+client_id = "env(SUPABASE_AUTH_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_GOOGLE_SECRET)"

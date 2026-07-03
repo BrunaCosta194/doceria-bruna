@@ -6,6 +6,7 @@ import Botao from "../componentes/Botao";
 import "./conta.css";
 
 const ROTULO_STATUS = {
+  aguardando_confirmacao: "Aguardando confirmação",
   novo: "Recebido",
   confirmado: "Confirmado",
   em_preparo: "Em preparo",

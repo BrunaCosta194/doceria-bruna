@@ -321,6 +321,47 @@
   margin-top: 0.4rem;
   padding-top: 0.6rem !important;
 }
+.painel-modal__confirmar {
+  margin-top: 1.4rem;
+  padding: 1rem;
+  background: #fdeecf;
+  border: 1px solid #f0d59a;
+  border-radius: var(--r-lg);
+}
+.painel-modal__confirmar p {
+  font-size: 0.9rem;
+  color: #8a6218;
+  margin-bottom: 0.7rem;
+}
+.painel-modal__confirmar-acoes {
+  display: flex;
+  gap: 0.6rem;
+}
+.botao-confirmar,
+.botao-recusar {
+  flex: 1;
+  padding: 0.65rem;
+  border-radius: var(--r-md);
+  font-weight: 700;
+  font-size: 0.92rem;
+  border: 1px solid transparent;
+}
+.botao-confirmar {
+  background: var(--salvia-500);
+  color: #fff;
+}
+.botao-confirmar:hover {
+  background: var(--salvia-700);
+}
+.botao-recusar {
+  background: var(--papel);
+  color: #a5453d;
+  border-color: var(--rosa-300);
+}
+.botao-recusar:hover {
+  background: var(--rosa-50);
+}
+
 .painel-modal__status {
   display: flex;
   flex-direction: column;
